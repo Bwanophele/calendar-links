@@ -31,7 +31,14 @@ class Link
     /** @var string */
     protected $description;
 
-    /** @var bool */
+	/** @var array */
+	protected $attendee;
+
+	/** @var string */
+	protected $organizer;
+
+
+	/** @var bool */
     protected $allDay;
 
     /** @var string */
@@ -92,6 +99,28 @@ class Link
 
         return $this;
     }
+
+	/**
+	 * @param array $attendee
+	 *
+	 * @return $this
+	 */
+	public function attendee(array $attendee)
+	{
+		$this->attendee = $attendee;
+		return $this;
+	}
+
+	/**
+	 * @param string $organizer
+	 *
+	 * @return $this
+	 */
+	public function organizer(string $organizer)
+	{
+		$this->organizer = $organizer;
+		return $this;
+	}
 
     public function google(): string
     {

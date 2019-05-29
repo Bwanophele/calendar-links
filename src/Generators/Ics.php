@@ -15,7 +15,8 @@ class Ics implements Generator
         $url = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
-            'BEGIN:VEVENT',
+			'METHOD:REQUEST',
+			'BEGIN:VEVENT',
             'UID:'.$this->generateEventUid($link),
             'SUMMARY:'.$link->title,
         ];
@@ -33,6 +34,18 @@ class Ics implements Generator
         if ($link->description) {
             $url[] = 'DESCRIPTION:'.$this->escapeString($link->description);
         }
+		if ($link->organizer) {
+			$url[] = 'ORGANIZER:' . $this->escapeString($link->organizer) . ':mailto:' . $this->escapeString($link->organizer);
+		}
+
+		if ($link->attendee) {
+
+			foreach ($link->attendee as $attendee) {
+				$url[] = 'ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ 						TRUE;CN=' . $this->escapeString($attendee) . ';X-NUM-GUESTS=0:mailto:' . $this->escapeString($attendee);
+			}
+
+		}
         if ($link->address) {
             $url[] = 'LOCATION:'.$this->escapeString($link->address);
         }
