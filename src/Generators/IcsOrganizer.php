@@ -8,7 +8,7 @@ use Spatie\CalendarLinks\Generator;
 /**
  * @see https://icalendar.org/RFC-Specifications/iCalendar-RFC-5545/
  */
-class Ics implements Generator
+class IcsOrganizer implements Generator
 {
 	public function generate(Link $link): string
 	{
@@ -17,7 +17,7 @@ class Ics implements Generator
 			'PRODID:-//Google Inc//Google Calendar 70.9054//EN',
 			'VERSION:2.0',
 			'CALSCALE:GREGORIAN',
-			'METHOD:REQUEST',
+			'METHOD:PUBLISH',
 			'X-WR-TIMEZONE:Europe/Paris',
 			'BEGIN:VEVENT',
 		];
